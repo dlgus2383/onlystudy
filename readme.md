@@ -1,36 +1,76 @@
-# C++ 간단 정리 
+# C++ 정리 
 
-## 입력,출력 
-C 스타일 입출력 
+## 입출력
+### C 스타일 입출력 
 
     int a
-    scanf("%d",&a)           #입력
-    printf(a)                #출력
+    scanf("%d",&a)               #입력
+    printf(a)                    #출력
 
-C++ 스타일 입출력
+### C++ 스타일 입출력
 
     int a  
-    std::cin>>a;             #입력
-    std::cout<<a<<std::endl; #출력
+    std::cin >> a;               #입력
+    std::cout << a << std::endl; #출력
+
+### C++ 문자열 입출력
+
+    char a[200];
+    std::cin >> a;               #입력
+    std::cout << a << std::endl; #출력
+_____
+## 오버로딩 
+    
+    int Func(int a){
+        return a;
+    }
+    int Func(int a , int b){
+        return a+b;
+    }
+
+    std::cout << Func(5) << std::endl;     #5 출력
+    std::cout << Func(5 ,5) << std::endl;  #10 출력 
+______
+## 함수 디폴트 값 선언 
+
+    int Func(int a = 5 , int b = 6){
+        return a+b;
+    }
+    std::cout << Func() << std::endl;      # 11 출력 
+    std::cout << Func(10) << std::endl;    # 16 출력
+    std::cout << Func(10,10) << std::endl; # 20 출력 
+
+
+    int Func(int a = 5 , int b ) #에러 사용 불가 
+
+_______
+## 인라인 함수 
+### C언어 매크로 함수
+
+    #define SQUARE(x) ((x)*(x))
+    
+    std::cout << SQUARE(5) << std::endl;     # 25 출력 
+    std::cout << SQUARE(3.15) << std::endl;  # 9.9225 출력
+### C++ 인라인 함수 
+
+    inline int SQUARE(int x){
+         return x*x;
+    }
+    std::cout << SQUARE(5) << std::endl;     # 25 출력 
+    std::cout << SQUARE(3.15) << std::endl;  # 9 출력 
+
+### C++ 템플릿
+
+    template <typename T>
+    inline T SQUARE(T x){
+        return x*x
+    }
+    std::cout << SQUARE(5) << std::endl;     # 25 출력 
+    std::cout << SQUARE(3.15) << std::endl;  # 9.9225 출력 
+
 
 ## 변수 
---------
-### 선언과 정의
 
-
-변수를 사용하기 위해서는 선언(declaration)과 정의(definition)를 해야 한다
-
-|선언 | 정의 |
-|---|:---|
-|컴파일러가 참조할 식별자와 이름을 명시  |식별자와 이름을 통해 필요한 코드를 생성 |
-|메모리 할당 X | 메모리 할당 O|
-
-선언
-
-    int a;
-정의
-
-    a = 5;
 
 --------
 
@@ -46,14 +86,14 @@ C++ 스타일 입출력
 |---|:---:|---:|
 | char | 1bytes|-128 ~ 127|
 |unsigned char | 1bytes |0~255
-|short|2 bytes|-2^15 ~ (2^15 - 1)|
-|unsigned short | 2 bytes|0 ~ (2^16 - 1)|
-|int|4 bytes|-2^31 ~ (2^31 - 1)|
-|unsigned int|4 bytes|0 ~ (2^32 - 1)|
-|long|4 bytes|-2^31 ~ (2^31 - 1)|
-|unsigned long|4 bytes|0 ~ (2^32 - 1)|
-|long long | 8bytes | -2^63 ~ (2^63 -1) |
-|unsigned long long |8 bytes|0 ~ (2^64 - 1)|
+|short|2 bytes|-32,768 ~ 32,767|
+|unsigned short | 2 bytes|0 ~ 65,535|
+|int|4 bytes|-2,147,483,648 ~ 2,147,483,647|
+|unsigned int|4 bytes|0 ~ 4,294,967,295|
+|long|4 bytes|-2,147,483,648 ~ 2,147,483,647|
+|unsigned long|4 bytes|0 ~ 4,294,967,295|
+|long long | 8bytes |-9,223,372,036,854,775,808~9,223,372,036,854,775,807|
+|unsigned long long |8 bytes|0~18,446,744,073,709,551,615|
 
 **실수형**
 | 타입 | 할당 메모리 크기 | 표현 범위 |
